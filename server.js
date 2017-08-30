@@ -33,7 +33,7 @@ var articles={
 			Andhra Pradesh
 			517 126
 </p>`},
-'atricle-three':{
+'aricle-three':{
 	title:'article three | Cad',
 	heading :'Article three',
 	date:'May 31 2017',
