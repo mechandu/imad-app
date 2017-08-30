@@ -4,23 +4,92 @@ var path = require('path');
 
 var app = express();
 app.use(morgan('combined'));
-
+var articles={
+'article-one':{
+	title:'article one | Cad',
+	heading :'Article One',
+	date:'May 06 2017',
+	content:`
+	<p>
+			Bheemineni Chandrika D/o Bheemineni Lokanadha Naidu
+			Lankipalle (V)
+			C R Kandriga (P)			
+			Penumur (M)
+			Chittoor (D)
+			Andhra Pradesh
+			517 126
+</p>`},
+'articletwo':{
+	title:'article two | Cad',
+	heading :'Article two',
+	date:'May 23 2017',
+	content:`
+	<p>
+			Bheemineni Chandrika D/o Bheemineni Lokanadha Naidu
+			Lankipalle (V)
+			C R Kandriga (P)			
+			Penumur (M)
+			Chittoor (D)
+			Andhra Pradesh
+			517 126
+</p>`},
+'atricle-three':{
+	title:'article three | Cad',
+	heading :'Article three',
+	date:'May 31 2017',
+	content:`
+	<p>
+			Bheemineni Chandrika D/o Bheemineni Lokanadha Naidu
+			Lankipalle (V)
+			C R Kandriga (P)			
+			Penumur (M)
+			Chittoor (D)
+			Andhra Pradesh
+			517 126
+</p>`}
+};
+function createTemplate(data)
+{
+	var title=data.title;
+	var date=dta.date;
+	var heading=data.heading;
+	var content=data.content;
+	var htmlTemplate=`
+		 <html>
+			 <head>
+				<title>
+				 Article-one|Chandhu
+				 </title>
+				 <link href="/ui/style.css" rel="stylesheet" />
+			 </head>
+			 <body>
+			 <div class="container">
+				<div>
+					<a href="/">Home</a>
+				</div>
+				<h3>
+					${heading}
+				</h3>
+				<div> 
+					${date}
+				</div>
+				<div>
+					${content}
+				</div>
+			</div>
+			 </body>
+		 </html>
+		 `;
+		 return htmlTemplate
+}
+ 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/article-one', function (req, res) {
-  res.send('Article one requested and will be served here');
-});
-app.get('/article-twoo', function (req, res) {
-  res.send('Article two requested and will be served here');
-});
-app.get('/article-three', function (req, res) {
-  res.send('Article three requested and will be served here');
-});
-
-app.get('/ui/style.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'style.css'));
+app.get('/:articleName', function (req, res) {
+  var articleName=req.params.articleName;
+  res.send(createTemplate(articles[articleName]));
 });
 
 app.get('/ui/madi.png', function (req, res) {
